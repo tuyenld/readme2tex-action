@@ -1,18 +1,14 @@
 # This is a basic workflow to help you get started with Actions
 
 name: readme2tex-action
-author: montali
-description: GH action that automatically builds every .tex.md file in the repo
-branding:
-  icon: "dollar-sign"
-  color: "green"
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,13 +33,13 @@ jobs:
           pip3 install readme2tex
       - name: Build readmes
         run: |
-          find . -type f -name '*.tex.md' -execdir python3 -m readme2tex --readme {} --nocdn --output "{}" \;
-      - name: Rename built .md files
+          find . -type f -name '*.tex.md' -execdir python3 -m readme2tex --readme "{}" --nocdn --output "{}.temp" \;
+      - name: Copy built .md files
         run: |
-          find . -type f -exec rename 's/.tex.md/.md/' '{}' \;
+          find . -type f -exec rename -f 's/.tex.md.temp/.md/' '{}' \;
       - name: Commit the built files
         run: |
           git config --global user.name '${{github.repository_owner}}'
           git config --global user.email '${{github.actor}}@users.noreply.github.com'
-          git diff --quiet || (git add . && git commit -m "Built the .tex.md files")
+          git add . && git commit -m "Built the .tex.md files"
           git push
