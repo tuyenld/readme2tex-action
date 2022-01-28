@@ -17,11 +17,11 @@ Here is Latex.
 $$
 \huge\text{Hello \LaTeX}
 $$
-Block math display.
+Block math looks great.
 $$
 \frac{n!}{k!(n-k)!} = {n \choose k}
 $$
 
-It is inline math. Ff $ax^2 + bx + c = 0$, then $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+It is inline math. If $ax^2 + bx + c = 0$, then $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
 
 See more at [readme2tex](https://github.com/leegao/readme2tex)
